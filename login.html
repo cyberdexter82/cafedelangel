@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café del Ángel</title>
+    <link rel="stylesheet" href="style.css"/>
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === "user" && password === "password") {
+                alert("¡Login exitoso!");
+                window.location.href = "Buscador.html"; // Redirige a la página principal
+            } else {
+                alert("Credenciales incorrectas. Inténtalo de nuevo.");
+            }
+        }
+        
+        function purchase() {
+            const coffeeAmount = document.getElementById('coffeeAmount').value;
+            alert("Has comprado " + coffeeAmount + " café. ¡Gracias por tu compra!");
+        }
+    </script>
+</head>
+<body>
+  <section class="relative">
+    <img alt="Cafe"
+      src="cafe1.png" />
+<header>
+    <h1 class="container"></h1>
+    <h1 class="container">Bienvenido al Inicio de Sesion</h1>
+</header>
+
+<div class="container">
+
+    <input type="text" id="username" placeholder="Usuario">
+    <input type="password" id="password" placeholder="Contraseña">
+    <button onclick="login()">Entrar</button>
+
+    <div id="purchaseSection" style="display: none;">
+        <h3>Sección de Pago</h3>
+        <p>Información: Puedes comprar café de la mejor calidad en "Café del Ángel".</p>
+        <input type="number" id="coffeeAmount" placeholder="Cantidad de café" min="1">
+        <button onclick="purchase()">Comprar Café</button>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 Café del Ángel</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<html lang="es">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Comprar Café - Café Moca
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body class="bg-gray-50 text-gray-900">
+  <main class="max-w-md mx-auto p-6">
+   <h1 class="text-3xl font-extrabold text-yellow-800 mb-8 text-center">
+    Lista de Cafés
+   </h1>
+   <ul class="space-y-4">
+    <li class="flex justify-between items-center bg-white p-4 rounded shadow">
+     <span class="text-lg font-semibold">
+      Café Moca
+     </span>
+     <button class="btn-buy" data-product="Café Moca" type="button">
+      Comprar
+     </button>
+    </li>
+    <li class="flex justify-between items-center bg-white p-4 rounded shadow">
+     <span class="text-lg font-semibold">
+      Expreso Americano
+     </span>
+     <button class="btn-buy" data-product="Expreso Americano" type="button">
+      Comprar
+     </button>
+    </li>
+    <li class="flex justify-between items-center bg-white p-4 rounded shadow">
+     <span class="text-lg font-semibold">
+      Capuchino
+     </span>
+     <button class="btn-buy" data-product="Capuchino" type="button">
+      Comprar
+     </button>
+    </li>
+    <li class="flex justify-between items-center bg-white p-4 rounded shadow">
+     <span class="text-lg font-semibold">
+      Cafe Irish
+     </span>
+     <button class="btn-buy" data-product="Cafe Irish" type="button">
+      Comprar
+     </button>
+    </li>
+    <li class="flex justify-between items-center bg-white p-4 rounded shadow">
+     <span class="text-lg font-semibold">
+      Cafe Inglés
+     </span>
+     <button class="btn-buy" data-product="Cafe Inglés" type="button">
+      Comprar
+     </button>
+    </li>
+    <li class="flex justify-between items-center bg-white p-4 rounded shadow">
+     <span class="text-lg font-semibold">
+      Cafe Australiano
+     </span>
+     <button class="btn-buy" data-product="Cafe Australiano" type="button">
+      Comprar
+     </button>
+    </li>
+    <li class="flex justify-between items-center bg-white p-4 rounded shadow">
+     <span class="text-lg font-semibold">
+      Cafe Helado
+     </span>
+     <button class="btn-buy" data-product="Cafe Helado" type="button">
+      Comprar
+     </button>
+    </li>
+   </ul>
+  </main>
+  <!-- Modal -->
+  <div aria-hidden="true" class="modal hidden" id="modal">
+   <div class="modal-content">
+    <h3 class="modal-title" id="modal-title">
+     ¡Gracias por tu compra!
+    </h3>
+    <p class="modal-message" id="modal-message">
+     Has comprado el café.
+    </p>
+    <button aria-label="Cerrar mensaje de compra" class="modal-close" id="modal-close" type="button">
+     Cerrar
+    </button>
+   </div>
+  </div>
+  <script>
+   const buyButtons = document.querySelectorAll('.btn-buy');
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalMessage = document.getElementById('modal-message');
+    const modalClose = document.getElementById('modal-close');
+
+    buyButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const productName = button.getAttribute('data-product');
+        modalTitle.textContent = '¡Gracias por tu compra!';
+        modalMessage.textContent = `Has comprado el café: ${productName}.`;
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    modalClose.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+ </body>
+</html>
