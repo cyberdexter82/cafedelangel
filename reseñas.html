@@ -2,40 +2,87 @@
 <html lang="es">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cafe del Angel</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reseñas - Cafe del Angel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'coffee-dark': '#4A2312', // Café muy oscuro para textos y bordes
+                        'coffee-light': '#D2B48C', // Tostado claro para fondo de botón
+                        'coffee-accent': '#6F4E37', // Café medio para resaltar
+                        'background-light': '#F5F5DC', // Color crema/beige para el cuerpo
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
-<body>
-       <div class="grid md:grid-cols-2 gap-6 mt-4">
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img alt="Reseña1 "
-          src="reseña.png"
-          height="250" />
-        <div class="p-6">
+<body class="bg-background-light min-h-screen">
 
-          <h2 class="text-xl font-semibold mb-2">Julieta Velgara</h2>
-          <p class="text-gray-600 mb-4">02 Diciembre 2023</p>
-          <p class="text-gray-700 mb-4">Mis amigas y yo vamos cada fin de semana a la cafeteria y siempre nos reciben con un gran carisma, recomendado.</p>
-          <a href="https://www.facebook.com/cafeteriadelangel/"><i class="fab fa-facebook-f"></i>
-          <button class="text-center text-white px-4 py-2 rounded">LEER MÁS</button>
-          </div></a>
-      </div>
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <img alt="Reseña2"
-          src="reseña2.png"
-          height="250" />
-        <div class="p-6">
-          <h2 class="text-xl font-semibold mb-2"> Castillo Lopez 359 </h2>
-          <p class="text-gray-600 mb-4">29 Noviembre 2022</p>
-          <p class="text-gray-700 mb-4">Recomiendo este lugar ya que aqui lleve a mi novia a proponerle matrimonio y el servicio de los empleados estuvo de lujo y la atencion de los clientes.</p>
-          <a href="https://www.facebook.com/cafeteriadelangel/"><i class="fab fa-facebook-f"></i>
-          <button class="text-center bg-brown-500 text-white px-4 py-2 rounded">LEER MÁS</button>
-        </div></a>
-      </div>
+    <header class="bg-coffee-dark text-white p-6 shadow-lg">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold">Reseñas de Cafe del Angel</h1>
+            <p class="text-coffee-light mt-1">Lo que nuestros clientes dicen sobre nosotros.</p>
+        </div>
+    </header>
+
+    <div class="max-w-4xl mx-auto p-6 lg:p-10">
+
+        <h2 class="text-3xl font-extrabold text-center text-coffee-dark mb-8">Nuestras Experiencias</h2>
+        
+        <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2">
+
+            <div class="bg-white rounded-xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition duration-300 ease-in-out border-4 border-coffee-accent">
+                
+                <img alt="Reseña1 de Julieta Velgara"
+                    src="reseña.png"
+                    class="w-full h-56 object-cover border-b-4 border-coffee-accent"
+                    loading="lazy" />
+                
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-coffee-dark mb-1">Julieta Velgara</h3>
+                    <p class="text-gray-500 text-sm italic mb-4">02 Diciembre 2023</p>
+                    <p class="text-gray-700 mb-6 border-l-4 border-coffee-light pl-3">
+                        "Mis amigas y yo vamos cada fin de semana a la cafetería y siempre nos reciben con un gran carisma, recomendado."
+                    </p>
+                    
+                    <a href="https://www.facebook.com/cafeteriadelangel/" target="_blank" class="block">
+                        <button class="w-full bg-coffee-dark text-white font-semibold py-3 rounded-lg hover:bg-coffee-accent transition duration-200 shadow-md">
+                            LEER MÁS EN FACEBOOK
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition duration-300 ease-in-out border-4 border-coffee-accent">
+                
+                <img alt="Reseña2 de Castillo Lopez 359"
+                    src="reseña2.png"
+                    class="w-full h-56 object-cover border-b-4 border-coffee-accent"
+                    loading="lazy" />
+                
+                <div class="p-6">
+                    <h3 class="text-2xl font-bold text-coffee-dark mb-1">Castillo Lopez 359</h3>
+                    <p class="text-gray-500 text-sm italic mb-4">29 Noviembre 2022</p>
+                    <p class="text-gray-700 mb-6 border-l-4 border-coffee-light pl-3">
+                        "Recomiendo este lugar ya que aquí llevé a mi novia a proponerle matrimonio y el servicio de los empleados estuvo de lujo y la atención de los clientes."
+                    </p>
+                    
+                    <a href="https://www.facebook.com/cafeteriadelangel/" target="_blank" class="block">
+                        <button class="w-full bg-coffee-dark text-white font-semibold py-3 rounded-lg hover:bg-coffee-accent transition duration-200 shadow-md">
+                            LEER MÁS EN FACEBOOK
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
     </div>
 </body>
 </html>
