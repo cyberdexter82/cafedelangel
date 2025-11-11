@@ -55,7 +55,7 @@ SITE_ID = 1
 # MIDDLEWARE
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 🔥 AÑADIR WHITENOISE: Justo después de SecurityMiddleware
+    # 🔥 ARREGLO WHITENOISE E INDENTACIÓN 🔥
     'whitenoise.middleware.WhiteNoiseMiddleware',
     # ---
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -119,3 +119,15 @@ LOGIN_URL = 'login'
 # 🔹 Configuración de Archivos Media (Imágenes subidas por usuarios)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# -----------------------------------------------
+# 🔥 CORRECCIÓN FINAL PARA AZURE (CSRF y SSL) 🔥
+# -----------------------------------------------
+
+# 🔥 1. Indica a Django que confíe en los encabezados HTTPS de Azure
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# 🔥 2. Asegura que el CSRF y otras cookies solo se envíen por HTTPS
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
