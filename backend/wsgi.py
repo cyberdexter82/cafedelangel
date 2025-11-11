@@ -1,25 +1,17 @@
-"""
-WSGI config for backend project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
-"""
-
 import os
 from django.core.wsgi import get_wsgi_application
-# --- 👇 1. Importa WhiteNoise y settings ---
+
+# Importar WhiteNoise AQUI, después de la aplicación
 from whitenoise import WhiteNoise
-from django.conf import settings
-# ---
+
+# La importación de settings debe estar dentro de una función si se usa en wsgi
+# Usaremos settings.STATIC_ROOT directamente en la envoltura
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend.settings')
 
-# --- 2. Obtiene la aplicación Django estándar ---
+# 1. Obtiene la aplicación Django estándar
 application = get_wsgi_application()
 
-# --- 👇 3. Envuelve la aplicación con WhiteNoise ---
-# WhiteNoise ahora buscará archivos en la carpeta que definiste en STATIC_ROOT
-application = WhiteNoise(application, root=settings.STATIC_ROOT)
-# ---
+# 2. Envuelve la aplicación con WhiteNoise, usando la configuración global
+# Usamos el path completo '/home/site/wwwroot/staticfiles/' como backup absoluto.
+application = WhiteNoise(application, root='/home/site/wwwroot/staticfiles/')
