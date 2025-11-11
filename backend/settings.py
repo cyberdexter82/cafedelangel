@@ -4,25 +4,43 @@ Django settings for backend project.
 
 import os
 from pathlib import Path
+# 🔥 CRUCIAL para conectar a Azure PostgreSQL
+import dj_database_url 
 
 # BASE DIR
+# En su estructura, la carpeta de configuración ('backend') está dentro de la carpeta raíz.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 🔹 Templates
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
-# 🔹 Archivos estáticos (CSS, JS, imágenes)
+
+# -----------------------------------------------
+# 🔥 CONFIGURACIÓN DE PRODUCCIÓN Y ESTÁTICOS 🔥
+# -----------------------------------------------
+
+# 🔹 Archivos estáticos (CSS, JS)
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+# ESTO RESUELVE EL ERROR 'ImproperlyConfigured'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+
+
 # SECURITY
 SECRET_KEY = 'django-insecure-&+7ia!=_s&c!h8&7j$xh74)c^o(u9=!d5rob2f&%ciux=(z-2)'
-DEBUG = True
-ALLOWED_HOSTS = []
 
-# APLICACIONES
+# 🔥 DESACTIVADO para producción en Azure
+DEBUG = False 
+
+# 🔥 Permitir acceso desde el dominio de Azure
+ALLOWED_HOSTS = ['.azurewebsites.net', '127.0.0.1'] 
+
+
+# 🔹 APLICACIONES
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -30,11 +48,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Necesario para manejar dominios, aunque se use poco.
+    'django.contrib.sites', 
     'api',
     'usuarios',
 ]
+SITE_ID = 1 # ID necesario para 'django.contrib.sites'
 
-# MIDDLEWARE
+
+# MIDDLEWARE (Se deja igual)
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -47,7 +69,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'backend.urls'
 
-# 🔹 TEMPLATES
+# 🔹 TEMPLATES (Se deja igual)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -58,7 +80,6 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                # --- 👇 ¡ESTA ES LA LÍNEA CORREGIDA! 👇 ---
                 'django.contrib.messages.context_processors.messages',
             ],
         },
@@ -67,15 +88,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
-# 🔹 BASE DE DATOS (por ahora SQLite)
+# 🔥 CONEXIÓN A POSTGRESQL EN AZURE
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        # Lee la cadena de conexión 'DATABASE_URL' que configuró en Azure App Service
+        default=os.environ.get('DATABASE_URL')
+    )
 }
 
-# 🔹 Validadores de contraseña
+# 🔹 Validadores de contraseña (Se dejan igual)
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -83,29 +104,20 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# 🔹 Idioma y zona horaria
+# 🔹 Idioma y zona horaria (Se dejan igual)
 LANGUAGE_CODE = 'es-mx'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# 🔹 Clave primaria por defecto
+# 🔹 Clave primaria por defecto (Se deja igual)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# 🔹 Modelo de usuario personalizado
+# 🔹 Modelo de usuario personalizado (Se deja igual)
 AUTH_USER_MODEL = 'usuarios.Usuario'
-
-# --- 👇 Esta línea está perfecta 👇 ---
 LOGIN_URL = 'login'
 
 
-# --- 👇 ¡LÍNEAS AÑADIDAS PARA LAS IMÁGENES DE PRODUCTOS! 👇 ---
-
-# --- Configuración de Archivos Media (Imágenes subidas por usuarios) ---
-
-# La URL base para los archivos media (ej: /media/productos/cafe.png)
+# 🔹 Configuración de Archivos Media (Imágenes subidas por usuarios)
 MEDIA_URL = '/media/'
-
-# La ruta en tu PC donde se guardarán esas imágenes
-# Creará una carpeta 'media' en la raíz de tu proyecto
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
